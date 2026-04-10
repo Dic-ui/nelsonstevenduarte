@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Testing App</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Poppins',sans-serif;margin:0;background:linear-gradient(135deg,#667eea,#764ba2);color:#333}
+header{background:#1f2937;color:white;padding:20px;text-align:center}
+nav{display:flex;justify-content:center;background:#111827;flex-wrap:wrap}
+nav button{background:none;border:none;color:white;padding:12px 20px;cursor:pointer;transition:.3s}
+nav button:hover{background:#374151}
+section{display:none;padding:30px}
+section.active{display:block}
+.container{max-width:900px;margin:auto}
+.card{background:white;padding:20px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.2);margin-bottom:20px}
+input,textarea,select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+button.action{background:#6366f1;color:white;border:none;padding:10px;border-radius:8px;cursor:pointer}
+button.action:hover{background:#4f46e5}
+.success{color:green;font-weight:bold}
+.error{color:red;font-weight:bold}
+.dashboard-box{display:flex;gap:15px;flex-wrap:wrap}
+.dashboard-item{flex:1;background:#6366f1;color:white;padding:20px;border-radius:10px;text-align:center}
+footer{background:#1f2937;color:white;text-align:center;padding:15px;margin-top:30px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Plataforma de Pruebas QA</h1>
+<p>Sistema simulado para automatización con Selenium</p>
+</header>
+
+<nav>
+<button onclick="show('home')">Inicio</button>
+<button onclick="show('login')">Login</button>
+<button onclick="show('registro')">Registro</button>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('perfil')">Perfil</button>
+<button onclick="show('contacto')">Contacto</button>
+</nav>
+
+<section id="home" class="active">
+<div class="container">
+<div class="card">
+<h2>Bienvenido</h2>
+<p>Esta aplicación permite realizar pruebas funcionales y no funcionales.</p>
+</div>
+</div>
+</section>
+
+<section id="login">
+<div class="container">
+<div class="card">
+<h2>Login</h2>
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
+<button class="action" onclick="login()">Ingresar</button>
+<p id="loginMsg"></p>
+</div>
+</div>
+</section>
+
+<section id="registro">
+<div class="container">
+<div class="card">
+<h2>Registro</h2>
+<input id="name" placeholder="Nombre">
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Contraseña">
+<select id="role">
+<option value="">Seleccione rol</option>
+<option>Usuario</option>
+<option>Administrador</option>
+</select>
+<button class="action" onclick="registro()">Registrar</button>
+<p id="regMsg"></p>
+</div>
+</div>
+</section>
+
+<section id="dashboard">
+<div class="container">
+<div class="card">
+<h2>Dashboard</h2>
+<div class="dashboard-box">
+<div class="dashboard-item">Usuarios: 10</div>
+<div class="dashboard-item">Pruebas: 25</div>
+<div class="dashboard-item">Errores: 2</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="perfil">
+<div class="container">
+<div class="card">
+<h2>Perfil</h2>
+<input id="profileName" placeholder="Nombre">
+<input id="profileEmail" placeholder="Email">
+<button class="action" onclick="guardarPerfil()">Guardar</button>
+<p id="perfilMsg"></p>
+</div>
+</div>
+</section>
+
+<section id="contacto">
+<div class="container">
+<div class="card">
+<h2>Contacto</h2>
+<input id="cname" placeholder="Nombre">
+<input id="cemail" placeholder="Email">
+<textarea id="cmsg" placeholder="Mensaje"></textarea>
+<button class="action" onclick="contacto()">Enviar</button>
+<p id="cResp"></p>
+</div>
+</div>
+</section>
+
+<footer>
+<p>Diseñado por Nelson Steven DUare Traslaviña</p>
+</footer>
+
+<script>
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+
+function login(){let u=user.value,p=pass.value,m=loginMsg;if(u==='admin'&&p==='1234'){m.textContent='Login exitoso';m.className='success';show('dashboard')}else if(!u||!p){m.textContent='Campos obligatorios';m.className='error'}else{m.textContent='Credenciales incorrectas';m.className='error'}}
+
+function registro(){let m=regMsg;if(!name.value||!email.value||!password.value||!role.value){m.textContent='Complete todos los campos';m.className='error'}else if(!email.value.includes('@')){m.textContent='Email inválido';m.className='error'}else{m.textContent='Registro exitoso';m.className='success'}}
+
+function guardarPerfil(){let m=perfilMsg;if(!profileName.value||!profileEmail.value){m.textContent='Datos incompletos';m.className='error'}else{m.textContent='Perfil actualizado';m.className='success'}}
+
+function contacto(){let r=cResp;if(!cname.value||!cemail.value||!cmsg.value){r.textContent='Complete todos los campos';r.className='error'}else{r.textContent='Mensaje enviado';r.className='success'}}
+</script>
+
+</body>
+</html>
